@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <windows.h>
+#include <fstream>
 
 /*
 	Task 2.
@@ -57,6 +58,33 @@ int main()
 	std::cin >> countOfSave;
 
 	std::cout << std::endl;
+
+	std::ofstream fout("D:\\array.txt");
+	if (!fout)
+		std::cout << "Cannot open this file!\n";
+
+	for (int index = 0; index < countOfSave; index++)
+		fout << arr[index] << " ";
+
+	fout.close();
+
+	std::ifstream fin("D:\\array.txt");
+	if (!fin)
+		std::cout << "Cannot open this file!\n";
+
+	std::cout << "Array: ";
+
+	for (int index = 0; index < countOfSave; index++)
+	{
+		fin >> arr[index];
+		std::cout << arr[index] << " ";
+	}
+
+	fin.close();
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
 	std::cout << "1) The minimum elements modul in the array: ";
 	
 	SetConsoleTextAttribute(handle, 3);

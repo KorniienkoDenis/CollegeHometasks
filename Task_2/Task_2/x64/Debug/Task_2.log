@@ -1,3 +1,0 @@
-﻿  Task_2.cpp
-E:\GitProjects\CollegeHometasks\Task_2\Task_2\Task_2.cpp(32,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Task_2.vcxproj -> E:\GitProjects\CollegeHometasks\Task_2\x64\Debug\Task_2.exe

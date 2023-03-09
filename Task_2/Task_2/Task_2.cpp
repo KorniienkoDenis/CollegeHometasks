@@ -36,29 +36,39 @@ int main()
 	int arr[size_arr1];
 
 	int countOfSave;
-	int minimumModul = 0;
 	int sumModul = 0;
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Initialize of the array with elements */
 	for (int index = 0; index < size_arr1; index++)
 		arr[index] = -15 + rand() % 19;
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Output the array in the console */
 	std::cout << "Array: ";
 	SetConsoleTextAttribute(handle, 3);
 
 	for (int index = 0; index < size_arr1; index++)
 		std::cout << arr[index] << " ";
-
 	SetConsoleTextAttribute(handle, 7);
 
 	std::cout << std::endl;
 	std::cout << std::endl;
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Ask the user input count of the elements which will be save in the file */
 	std::cout << "How many elements of array you want save in the file?\n";
 	std::cout << "Input count over here -> ";
 	std::cin >> countOfSave;
 
 	std::cout << std::endl;
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Make a thread which will write the array */
 	std::ofstream fout("D:\\array.txt");
 	if (!fout)
 		std::cout << "Cannot open this file!\n";
@@ -68,11 +78,15 @@ int main()
 
 	fout.close();
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Make a thread which will display the array in the console */
 	std::ifstream fin("D:\\array.txt");
 	if (!fin)
 		std::cout << "Cannot open this file!\n";
 
 	std::cout << "Array: ";
+	SetConsoleTextAttribute(handle, 3);
 
 	for (int index = 0; index < countOfSave; index++)
 	{
@@ -80,15 +94,20 @@ int main()
 		std::cout << arr[index] << " ";
 	}
 
+	SetConsoleTextAttribute(handle, 7);
+
 	fin.close();
 
 	std::cout << std::endl;
 	std::cout << std::endl;
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* The first condition in the task */
 	std::cout << "1) The minimum elements modul in the array: ";
-	
 	SetConsoleTextAttribute(handle, 3);
 
+	/* The first step: Find the modulus of all elements of the array */
 	for (int index = 0; index < countOfSave; index++)
 	{
 		if (arr[index] == 0)
@@ -101,24 +120,29 @@ int main()
 			arr[index] = arr[index];
 	}
 
-	for (int index = 0; index < countOfSave; index++)
+	/* The second step: Find the minimum modul element of the array */
+	int minimumModul = arr[0];
+
+	for (int index = 1; index < countOfSave; index++)
 	{
-		for (int j = index + 1; j < countOfSave; j++)
+		if ((minimumModul > arr[index]))
 		{
-			if (arr[index] > arr[j])
-			{
-				minimumModul = arr[j];
-			}
+			minimumModul = arr[index];
 		}
 	}
 
+	/* Output the minimum modul element */
 	std::cout << minimumModul << std::endl;
-
 	SetConsoleTextAttribute(handle, 7);
 
+	/* <----------------------------------------------------------------------------> */
+	
+	/* The second condition in the task */
 	std::cout << std::endl;
 	std::cout << "2) The sum of the moduls of the array's elements which standing after the first zero element: ";
-
+	
+	/* Find the sum of the modules of the array elements located after
+	   the first element, which is equal to zero. */
 	for (int index = 0; index < countOfSave; index++)
 	{
 		if (arr[index] == 0)
@@ -139,24 +163,26 @@ int main()
 		}
 	}
 
+	/* Output the sum of the modules of the array */
 	SetConsoleTextAttribute(handle, 3);
 	std::cout << sumModul << std::endl;
 	SetConsoleTextAttribute(handle, 7);
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Special condition in the task after the first and the second condition */
 	std::cout << std::endl;
 	std::cout << "The first half of the array contains elements that are in pair position, " << std::endl;
 	std::cout << "the second half of the array contains elements that are in odd position: ";
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "Array: ";
 
 	SetConsoleTextAttribute(handle, 3);
 
+	/* The first half of the array in which wrote the elements which standing in pair positions */
 	for (int index = 0; index < countOfSave; index++)
 		if (index % 2 == 0)
 			std::cout << arr[index] << " ";
 
+	/* The second half of the array in which wrote the elements which standing in odd positions */
 	for (int index = 0; index < countOfSave; index++)
 		if (index % 2 == 1)
 			std::cout << arr[index] << " ";
@@ -164,6 +190,8 @@ int main()
 	SetConsoleTextAttribute(handle, 7);
 
 	std::cout << std::endl;
+
+	/* <----------------------------------------------------------------------------> */
 
 	return 0;
 }

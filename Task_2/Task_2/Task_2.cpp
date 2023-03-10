@@ -115,9 +115,6 @@ int main()
 
 		if (arr[index] < 0)
 			arr[index] = arr[index] + -2 * arr[index];
-
-		if (arr[index] > 0)
-			arr[index] = arr[index];
 	}
 
 	/* The second step: Find the minimum modul element of the array */

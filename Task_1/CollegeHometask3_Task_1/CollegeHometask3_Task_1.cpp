@@ -28,10 +28,7 @@
 
 */
 
-double Cotan(const double& pi, double& alpha)
-{
-	return 1 / (tan((5 * pi) / 4 + (3 * alpha) / 2));
-}
+double Cotan(const double& pi, double& alpha);
 
 int main()
 {
@@ -41,9 +38,24 @@ int main()
 	double resultFirstFormula;
 	double resultSecondFormula;
 
-	std::cout << "input alpha: ";
-	std::cin >> alpha;
-	std::cout << std::endl;
+	while(true)
+	{
+		std::cout << "Input alpha: ";
+		std::cin >> alpha;
+		std::cout << std::endl;
+
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			continue;
+		}
+		else
+		{
+			break;
+		}
+
+	}
 
 	resultFirstFormula = (sin(pi / 2 + 3 * alpha)) / (1 - sin(3 * alpha - pi));
 	std::cout << "z1 = (sin(pi" << " / 2 + 3 * " << alpha << ")) / (1 - sin(3 * " << alpha << " - pi))\n";
@@ -58,4 +70,9 @@ int main()
 	std::cout << std::endl;
 
 	return 0;
+}
+
+double Cotan(const double& pi, double& alpha)
+{
+	return 1 / (tan((5 * pi) / 4 + (3 * alpha) / 2));
 }

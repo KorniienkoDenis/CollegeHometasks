@@ -31,7 +31,7 @@ HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 int main()
 {
 	srand(time(nullptr));
-	
+
 	const int size_arr1 = 50;
 	int arr[size_arr1];
 
@@ -42,7 +42,7 @@ int main()
 
 	/* Initialize of the array with elements */
 	for (int index = 0; index < size_arr1; index++)
-		arr[index] = -15 + rand() % 19;
+		arr[index] = -20 + rand() % 60;
 
 	/* <----------------------------------------------------------------------------> */
 
@@ -60,9 +60,21 @@ int main()
 	/* <----------------------------------------------------------------------------> */
 
 	/* Ask the user input count of the elements which will be save in the file */
-	std::cout << "How many elements of array you want save in the file?\n";
-	std::cout << "Input count over here -> ";
-	std::cin >> countOfSave;
+	do
+	{
+		std::cout << "How many elements of array you want save in the file? (10 to 50)\n";
+		std::cout << "Input count over here -> ";
+		std::cin >> countOfSave;
+
+		if (std::cin.fail())
+		{
+			std::cout << std::endl;
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			continue;
+		}
+
+	} while (countOfSave <= 9 || countOfSave >= 51);
 
 	std::cout << std::endl;
 

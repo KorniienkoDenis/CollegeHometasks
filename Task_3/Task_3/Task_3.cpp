@@ -33,13 +33,16 @@ int main()
 {
 	srand(time(nullptr));
 
+	int countMinimum = 0;
+
 	const int row = 5;
 	const int column = 5;
 
 	int matrix[row][column];
 
-	int countMinimum = 0;
+	/* <----------------------------------------------------------------------------> */
 
+	/* Initialize of the matrix with elements */
 	for (int indexRow = 0; indexRow < row; indexRow++)
 	{
 		for (int indexColumn = 0; indexColumn < column; indexColumn++)
@@ -48,6 +51,9 @@ int main()
 		}
 	}
 
+	/* <----------------------------------------------------------------------------> */
+
+	/* Output the matrix in the console */
 	std::cout << "Matrix 13x13 : ";
 	std::cout << std::endl;
 
@@ -63,8 +69,9 @@ int main()
 	}
 	SetConsoleTextAttribute(handle, 7);
 
+	/* <----------------------------------------------------------------------------> */
 
-
+	/* Make a thread which wll write the matrix in the file */
 	std::ofstream fout("D:\\matrix.txt");
 
 	if (!fout)
@@ -82,11 +89,12 @@ int main()
 
 	fout.close();
 
+	/* <----------------------------------------------------------------------------> */
 
-
+	/* Make a thread which will display the matrix in the console from the file */
 	std::ifstream fin("D:\\matrix.txt");
 
-	if (!fout)
+	if (!fin)
 		std::cout << "Cannot open thsi file!\n";
 
 	std::cout << std::endl;
@@ -107,6 +115,11 @@ int main()
 	}
 	SetConsoleTextAttribute(handle, 7);
 
+	fin.close();
+
+	/* <----------------------------------------------------------------------------> */
+
+	/* By using a function isLocalMinimum, we to do the first condition in the task */
 	std::cout << std::endl;
 	std::cout << "1) Count of the locale minimums: ";
 
@@ -124,13 +137,16 @@ int main()
 	std::cout << countMinimum;
 	std::cout << std::endl;
 
+	/* <----------------------------------------------------------------------------> */
 
-	std::cout << "2) The sum of modules of the elements which located above the main diagonal: " << SumModulElementsAboveTheMainDiagonal(matrix, row, column);
+	/* By using a function SumModulElementsAboveTheMainDiagonal(), we to do the second condition in the task */
+	std::cout << "2) The sum of moduls of the elements which located above the main diagonal: " << SumModulElementsAboveTheMainDiagonal(matrix, row, column);
 	std::cout << std::endl;
 
 	return 0;
 }
 
+/* A function which can find count of the locale minimum in the matrix */
 bool isLocalMinimum(int matrix[][5], int indexRow, int indexColumn, int maxRow, int maxColumn)
 {
 	int value = matrix[indexRow][indexColumn];
@@ -145,6 +161,7 @@ bool isLocalMinimum(int matrix[][5], int indexRow, int indexColumn, int maxRow, 
 	return false;
 }
 
+/* A function which can find the sum of modules of the elements which located above the main diagonal */
 int SumModulElementsAboveTheMainDiagonal(int matrix[][5], int row, int column)
 {
 	int sumModulAboveDiagonal = 0;

@@ -26,22 +26,25 @@
 
 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
+bool isLocalMinimum(int arr[][13], int row, int column, int maxRow, int maxColumn);
+
 int main()
 {
 	srand(time(nullptr));
 
 	const int row = 13;
 	const int column = 13;
+	int countMinimum = 0;
 
 	int matrix[row][column];
 
-
-
 	for (int indexRow = 0; indexRow < row; indexRow++)
+	{
 		for (int indexColumn = 0; indexColumn < column; indexColumn++)
+		{
 			matrix[indexRow][indexColumn] = -20 + rand() % 50;
-
-
+		}
+	}
 
 	std::cout << "Matrix 13x13 : ";
 	std::cout << std::endl;
@@ -103,8 +106,30 @@ int main()
 	SetConsoleTextAttribute(handle, 7);
 
 
+	std::cout << std::endl;
 
+	for (int indexRow = 0; indexRow < row; indexRow++)
+		for (int indexColumn = 0; indexColumn < column; indexColumn++)
+			if (isLocalMinimum(matrix, indexRow, indexColumn, row, column))
+				countMinimum++;
 
+	std::cout << std::endl;
+	std::cout << "1) Count of the locale minimums: " << countMinimum;
+	std::cout << std::endl;
 
 	return 0;
+}
+
+bool isLocalMinimum(int matrix[][13], int indexRow, int indexColumn, int maxRow, int maxColumn)
+{
+	int value = matrix[indexRow][indexColumn];
+	
+	if ((indexColumn == 0) && value < matrix[indexRow][indexColumn + 1])
+		return true;
+
+	if ((indexColumn > 0 && value < matrix[indexRow][indexColumn - 1] &&
+		value < matrix[indexRow][indexColumn + 1]))
+		return true;
+
+	return false;
 }

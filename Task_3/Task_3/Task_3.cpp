@@ -26,17 +26,19 @@
 
 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-bool isLocalMinimum(int arr[][13], int row, int column, int maxRow, int maxColumn);
+bool isLocalMinimum(int matrix[][5], int row, int column, int maxRow, int maxColumn);
+int SumModulElementsAboveTheMainDiagonal(int matrix[][5], int row, int column);
 
 int main()
 {
 	srand(time(nullptr));
 
-	const int row = 13;
-	const int column = 13;
-	int countMinimum = 0;
+	const int row = 5;
+	const int column = 5;
 
 	int matrix[row][column];
+
+	int countMinimum = 0;
 
 	for (int indexRow = 0; indexRow < row; indexRow++)
 	{
@@ -105,22 +107,31 @@ int main()
 	}
 	SetConsoleTextAttribute(handle, 7);
 
-
 	std::cout << std::endl;
+	std::cout << "1) Count of the locale minimums: ";
 
 	for (int indexRow = 0; indexRow < row; indexRow++)
+	{
 		for (int indexColumn = 0; indexColumn < column; indexColumn++)
+		{
 			if (isLocalMinimum(matrix, indexRow, indexColumn, row, column))
+			{
 				countMinimum++;
+			}
+		}
+	}
 
+	std::cout << countMinimum;
 	std::cout << std::endl;
-	std::cout << "1) Count of the locale minimums: " << countMinimum;
+
+
+	std::cout << "2) The sum of modules of the elements which located above the main diagonal: " << SumModulElementsAboveTheMainDiagonal(matrix, row, column);
 	std::cout << std::endl;
 
 	return 0;
 }
 
-bool isLocalMinimum(int matrix[][13], int indexRow, int indexColumn, int maxRow, int maxColumn)
+bool isLocalMinimum(int matrix[][5], int indexRow, int indexColumn, int maxRow, int maxColumn)
 {
 	int value = matrix[indexRow][indexColumn];
 	
@@ -132,4 +143,22 @@ bool isLocalMinimum(int matrix[][13], int indexRow, int indexColumn, int maxRow,
 		return true;
 
 	return false;
+}
+
+int SumModulElementsAboveTheMainDiagonal(int matrix[][5], int row, int column)
+{
+	int sumModulAboveDiagonal = 0;
+
+	for (int indexRow = 0; indexRow < row; indexRow++)
+	{
+		for (int indexColumn = indexRow + 1; indexColumn < column; indexColumn++)
+		{
+			if (matrix[indexRow][indexColumn] < 0)
+				sumModulAboveDiagonal += matrix[indexRow][indexColumn] + (-2 * matrix[indexRow][indexColumn]);
+			if (matrix[indexRow][indexColumn] > 0)
+				sumModulAboveDiagonal += matrix[indexRow][indexColumn];
+		}
+	}
+
+	return sumModulAboveDiagonal;
 }

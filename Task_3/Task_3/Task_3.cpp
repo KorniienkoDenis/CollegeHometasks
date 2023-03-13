@@ -26,8 +26,8 @@
 
 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-bool isLocalMinimum(int matrix[][5], int row, int column, int maxRow, int maxColumn);
-int SumModulElementsAboveTheMainDiagonal(int matrix[][5], int row, int column);
+bool isLocalMinimum(int matrix[][13], int row, int column, int maxRow, int maxColumn);
+int SumModulElementsAboveTheMainDiagonal(int matrix[][13], int row, int column);
 
 int main()
 {
@@ -35,8 +35,8 @@ int main()
 
 	int countMinimum = 0;
 
-	const int row = 5;
-	const int column = 5;
+	const int row = 13;
+	const int column = 13;
 
 	int matrix[row][column];
 
@@ -134,20 +134,26 @@ int main()
 		}
 	}
 
+	SetConsoleTextAttribute(handle, 3);
 	std::cout << countMinimum;
 	std::cout << std::endl;
-
+	SetConsoleTextAttribute(handle, 7);
 	/* <----------------------------------------------------------------------------> */
 
 	/* By using a function SumModulElementsAboveTheMainDiagonal(), we to do the second condition in the task */
-	std::cout << "2) The sum of moduls of the elements which located above the main diagonal: " << SumModulElementsAboveTheMainDiagonal(matrix, row, column);
+	std::cout << "2) The sum of moduls of the elements which located above the main diagonal: ";
+
+	SetConsoleTextAttribute(handle, 3);
+	std::cout << SumModulElementsAboveTheMainDiagonal(matrix, row, column);
+	SetConsoleTextAttribute(handle, 7);
+
 	std::cout << std::endl;
 
 	return 0;
 }
 
 /* A function which can find count of the locale minimum in the matrix */
-bool isLocalMinimum(int matrix[][5], int indexRow, int indexColumn, int maxRow, int maxColumn)
+bool isLocalMinimum(int matrix[][13], int indexRow, int indexColumn, int maxRow, int maxColumn)
 {
 	int value = matrix[indexRow][indexColumn];
 	
@@ -162,7 +168,7 @@ bool isLocalMinimum(int matrix[][5], int indexRow, int indexColumn, int maxRow, 
 }
 
 /* A function which can find the sum of modules of the elements which located above the main diagonal */
-int SumModulElementsAboveTheMainDiagonal(int matrix[][5], int row, int column)
+int SumModulElementsAboveTheMainDiagonal(int matrix[][13], int row, int column)
 {
 	int sumModulAboveDiagonal = 0;
 
